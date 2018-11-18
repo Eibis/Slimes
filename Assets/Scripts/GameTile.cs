@@ -48,7 +48,7 @@ public class GameTile : MonoBehaviour
             {
                 case SlimeType.NONE:
 
-                    Sprite.color = Color.white;
+                    Sprite.color = Color.gray;
 
                     break;
                 case SlimeType.RED:
@@ -72,7 +72,7 @@ public class GameTile : MonoBehaviour
         }
         else
         {
-            Sprite.color = Color.white;
+            Sprite.color = Color.gray;
         }
 
         switch (CurrentState)
