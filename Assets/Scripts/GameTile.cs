@@ -232,7 +232,9 @@ public class GameTile : MonoBehaviour
         Debug.Log("Damaged " + value);
 
         Slime.Damage(value);
-        DamageText.text = Slime.Health.ToString();
+
+        if(Slime != null)
+            DamageText.text = Slime.Health.ToString();
     }
 
     internal void SetSlime(Slime slime, TileState newState = TileState.EMPTY)

@@ -143,10 +143,10 @@ public class GamesparksManager : MonoBehaviour
         {
             SlimeType slime_type;
 
-            int? type = packet.Data.GetInt(0);
+            int? type = packet.Data.GetInt(3);
 
             if (type != null)
-                slime_type = (SlimeType)packet.Data.GetInt(0);
+                slime_type = (SlimeType)type;
             else
                 slime_type = SlimeType.NONE;
 
@@ -167,7 +167,7 @@ public class GamesparksManager : MonoBehaviour
         int[] targets = new int[] { other_player };
 
         RTData data = new RTData();
-        data.SetInt(0, (int)slimeType);
+        data.SetInt(3, (int)slimeType);
         data.SetInt(1, i);
         data.SetInt(2, j);
 
