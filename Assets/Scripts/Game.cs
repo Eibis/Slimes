@@ -159,6 +159,9 @@ public class Game : MonoBehaviour
         }
 
         UI.SetTurn(CurrentPlayer);
+
+        if (!GamesparksManager.Instance.IsLocalPlayer(CurrentPlayer))
+            GamesparksManager.Instance.SendPass();
     }
 
     void EndRound()

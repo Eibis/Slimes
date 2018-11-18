@@ -9,6 +9,7 @@ public class GameUI : MonoBehaviour
     public Image Choice_0;
     public Image Choice_1;
     public Text RoundText;
+    public Image PassButton;
 
     internal void SetNextSlime()
     {
@@ -53,5 +54,7 @@ public class GameUI : MonoBehaviour
     internal void SetTurn(int currentPlayer)
     {
         RoundText.text = "Player " + (currentPlayer + 1) + "'s turn";
+
+        PassButton.gameObject.SetActive(GamesparksManager.Instance.IsLocalPlayer(currentPlayer));
     }
 }

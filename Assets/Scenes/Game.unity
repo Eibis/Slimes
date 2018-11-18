@@ -1001,6 +1001,7 @@ MonoBehaviour:
   Choice_0: {fileID: 328879243}
   Choice_1: {fileID: 282788932}
   RoundText: {fileID: 771139072}
+  PassButton: {fileID: 842475322}
 --- !u!114 &1968071309
 MonoBehaviour:
   m_ObjectHideFlags: 0

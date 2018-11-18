@@ -139,11 +139,26 @@ public class GamesparksManager : MonoBehaviour
 
     private void OnPacketReceived(RTPacket packet)
     {
-        SlimeType slime_type = (SlimeType)packet.Data.GetInt(0);
-        int i = (int)packet.Data.GetInt(1);
-        int j = (int)packet.Data.GetInt(2);
+        if (packet.OpCode == 1)
+        {
+            SlimeType slime_type;
 
-        Game.Instance.HandleInput(slime_type, i, j);
+            int? type = packet.Data.GetInt(0);
+
+            if (type != null)
+                slime_type = (SlimeType)packet.Data.GetInt(0);
+            else
+                slime_type = SlimeType.NONE;
+
+            int i = (int)packet.Data.GetInt(1);
+            int j = (int)packet.Data.GetInt(2);
+
+            Game.Instance.HandleInput(slime_type, i, j);
+        }
+        else if (packet.OpCode == 2)
+        {
+            Game.Instance.PassTurn();
+        }
     }
 
     internal void SendInputData(SlimeType slimeType, int i, int j)
@@ -157,6 +172,16 @@ public class GamesparksManager : MonoBehaviour
         data.SetInt(2, j);
 
         RtGS.SendData(1, GameSparksRT.DeliveryIntent.RELIABLE, data, targets);
+    }
+
+    internal void SendPass()
+    {
+        int other_player = PeerId == 1 ? 2 : 1;
+        int[] targets = new int[] { other_player };
+
+        RTData data = new RTData();
+
+        RtGS.SendData(2, GameSparksRT.DeliveryIntent.RELIABLE, data, targets);
     }
 
     public void Authenticate(Action callback)
