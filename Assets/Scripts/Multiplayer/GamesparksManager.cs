@@ -86,15 +86,17 @@ public class GamesparksManager : MonoBehaviour
 
         foreach (var participant in resp.Participants)
         {
-            if (!assigned)
-            {
-                if (participant.Id == UserId)
+            if (participant.Id == UserId)
+            { 
+                PeerId = (int)participant.PeerId;
+
+                if (!assigned)
+                {
                     IsHost = true;
 
-                assigned = true;
+                    assigned = true;
+                }
             }
-
-            PeerId = (int)participant.PeerId;
         }
 
         sessionInfo = new RTSessionInfo(resp);
